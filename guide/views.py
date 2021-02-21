@@ -12,7 +12,7 @@ def home(request):
 
 
 def financial_accounting(request):
-    queryset = FinancialAccounting.objects.all()
+    queryset = FinancialAccounting.objects.all().order_by('s_no')
 
     my_filter = FinancialAccountingFilter(request.GET, queryset=queryset)
     queryset = my_filter.qs
@@ -45,6 +45,7 @@ def financial_accounting_questions(request):
                         result = cell1.value
                         if result[0:1].isdigit():
                             s_no = result[0:2]
+                            s_no = int(s_no.replace('.', '').lstrip())
                             questions = result[4:].lstrip().partition('\n')
                             question = questions[0]
                             print(f'{s_no} - {question}')
@@ -72,6 +73,7 @@ def financial_accounting_answers(request):
                         result = cell1.value
                         if result[0:1].isdigit():
                             s_no = result[0:2]
+                            s_no = int(s_no.replace('.', '').lstrip())
                             answer = result[4:].lstrip()
                             print(f'{s_no} - {answer[0]}')
 
