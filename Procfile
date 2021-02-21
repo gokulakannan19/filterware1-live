@@ -1,0 +1,1 @@
+web: gunicorn filterware1.wsgi --log-file-
