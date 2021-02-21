@@ -1,0 +1,53 @@
+{% extends 'guide/main.html' %} {% block content %}
+<br>
+
+<h1 style="color: red; text-align: center; background: hotpink;
+border-style: ridge; padding: 8px;">Financial Accounting</h1>
+<hr>
+<div class="container" style="background-color: navajowhite; padding: 8px;">
+<a
+  class="btn btn-warning"
+  href="{% url 'upload_financial_accounting_questions' %}"
+  >Upload questions</a
+>
+<a
+  class="btn btn-warning"
+  href="{% url 'upload_financial_accounting_answers' %}"
+  >Upload answers</a
+>
+<hr>
+
+<div class="row">
+  <div class="col">
+    <div class="card card-body" style="background-color:#03a9f4; padding: 8px;">
+
+      <form method="get" action="" style="font-size: medium; font-weight: bold;">
+        {% csrf_token %}
+        {{ my_filter.form }}
+
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">S. No</th>
+      <th scope="col">Question</th>
+      <th scope="col">Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for queryset in queryset %}
+    <tr>
+      <td>{{ queryset.s_no }}</td>
+      <td>{{ queryset.question }}</td>
+      <td>{{ queryset.answer }}</td>
+      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
